@@ -6,12 +6,15 @@ import Map from './components/Map/Map';
 import Table from './components/Table/Table';
 import { sortData } from './util';
 import LineGraph from './components/LineGraph';
+import 'leaflet/dist/leaflet.css';
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState('worldwide');
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
+  const [mapCenter, setMapCenter] = useState([20.8628, 30.2176]);
+  const [mapZoom, setMapZoom] = useState(2);
 
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all")
@@ -42,17 +45,24 @@ function App() {
 
   const onCountryChange = async (e) => {
     const countryCode = e.target.value;
-    setCountry(countryCode);
 
-    const url = countryCode === 'worldwide' ? "https://disease.sh/v3/covid-19/all" : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
+    const url = countryCode === "worldwide"
+        ? "https://disease.sh/v3/covid-19/all"
+        : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
 
-    await fetch(url)
-      .then(response => response.json())
-      .then(data => {
+     await fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
         setCountry(countryCode);
         setCountryInfo(data);
+        countryCode === "worldwide"
+          ? setMapCenter([20.8628, 30.2176])
+          : setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+        setTimeout(function () {
+          countryCode === "worldwide" ? setMapZoom(2) : setMapZoom(4);
+        }, 200);
       });
-  }
+  };
 
   return (
     <div className="app">
@@ -74,7 +84,7 @@ function App() {
           <InfoBox title="Recovered" cases={countryInfo.todayRecovered} total={countryInfo.recovered} />
           <InfoBox title="Deaths" cases={countryInfo.todayDeaths} total={countryInfo.deaths} />
         </div>
-        <Map />
+        <Map center={mapCenter} zoom={mapZoom} />
       </div>
       <Card className="app__right">
         <CardContent>
