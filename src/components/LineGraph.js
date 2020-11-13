@@ -85,11 +85,11 @@ const LineGraph = ({ casesType = 'cases' }) => {
 
   const backgroundColor = () => {
     if (casesType === "cases") {
-      return "210, 44, 44"
+      return "255, 0, 0"
     } else if (casesType === "recovered") {
-      return "154, 205, 50"
+      return "0, 128, 0"
     } 
-    return '110, 27, 9'
+    return '176, 0, 32'
   }
 
   return (

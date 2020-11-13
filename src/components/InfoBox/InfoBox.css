@@ -1,3 +1,9 @@
+:root {
+  --cases_col: red;
+  --recovered_col: green;
+  --death_col: #B00020;
+}
+
 .infoBox {
   flex: 1;
   cursor: pointer;
@@ -8,34 +14,38 @@
 }
 
 .infoBox__cases {
-  color: lightgreen;
+  color: var(--recovered_col);
   font-weight: 600;
   font-size: 1.75rem;
   margin-bottom: .5rem;
 }
 
+.infoBox__title {
+  color: #fff !important;
+}
+
 .infoBox__total {
-  color: teal;
+  color: var(--recovered_col);
   font-weight: 700 !important;
   font-size: .8rem !important;
   margin-top: 15px !important;
 }
 
 .infoBox__selected {
-  border-bottom: 10px solid yellowgreen;
+  border-bottom: 10px solid var(--recovered_col);
 }
 
 .infoBox__red {
-  border-color: #D22C2C;
+  border-color: var(--cases_col);
 }
 
 .infoBox__copper {
-  border-color: #6E1B09;
+  border-color: var(--death_col);
 }
 
 .info__cases__red {
-  color: #D22C2C !important;
+  color: var(--cases_col) !important;
 }
 .info__cases__copper {
-  color: #6E1B09;
+  color: var(--death_col);
 }

@@ -4,22 +4,22 @@ import { Circle, Popup } from 'react-leaflet';
 
 const casesTypeColors = {
   cases: {
-    hex: '#D22C2C',
-    rgb: "rgb(204, 16, 52)",
-    half_op: "rgba(204, 16, 52, 0.5)",
-    multiplier: 800,
+    hex: '#ff0000',
+    rgb: "rgb(255, 0, 0)",
+    // half_op: "rgba(204, 16, 52, 0.5)",
+    multiplier: 600,
   },
   recovered: {
-    hex: "#7dd71d",
-    rgb: "rgb(125, 215, 29)",
-    half_op: "rgba(125, 215, 29, 0.5)",
-    multiplier: 1200,
+    hex: "#008000",
+    rgb: "rgb(0, 128, 0)",
+    // half_op: "rgba(125, 215, 29, 0.5)",
+    multiplier: 1000,
   },
   deaths: {
-    hex: "#6E1B09",
-    rgb: "rgb(251, 68, 67)",
-    half_op: "rgba(251, 68, 67, 0.5)",
-    multiplier: 2000,
+    hex: "#B00020",
+    rgb: "rgb(176, 0, 32)",
+    // half_op: "rgba(251, 68, 67, 0.5)",
+    multiplier: 1200,
   }
 }
 

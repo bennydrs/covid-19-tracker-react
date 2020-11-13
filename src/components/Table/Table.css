@@ -3,7 +3,7 @@
   margin-bottom: 20px;
   overflow-y: scroll;
   height: 400px;
-  color: #6a5d5d;
+  color: #ddd;
 }
 
 .table tr {
@@ -16,5 +16,9 @@
 }
 
 .table tr:nth-of-type(odd) {
-  background-color: #f3f2f8;
+  background-color: #2d2d2d;
+}
+
+.table .table__cases {
+  color: red;
 }

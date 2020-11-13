@@ -10,9 +10,13 @@ const Map = ({ countries, casesType, center, zoom }) => {
       <LafletMap center={center} zoom={zoom}>
         {/* <CardContent> */}
         <TileLayer
+          attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+          url='https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png'
+        />
+        {/* <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+        /> */}
         {showDataOnMap(countries, casesType)}
         {/* </CardContent> */}
       </LafletMap>

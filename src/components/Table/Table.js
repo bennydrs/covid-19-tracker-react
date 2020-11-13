@@ -8,7 +8,7 @@ const Table = ({ countries }) => {
       {countries.map(({country, cases}) =>(
         <tr>
           <td>{country}</td>
-          <td><strong>{numberPrintStat(cases)}</strong></td>
+          <td className="table__cases"><strong>{numberPrintStat(cases)}</strong></td>
         </tr>
       ))}
     </div>

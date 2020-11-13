@@ -3,7 +3,7 @@
 }
 
 body {
-  background-color: #f5f6fa;
+  background-color: #111;
 }
 
 .app {
@@ -21,10 +21,11 @@ body {
 
 .app__header > h2 {
   font-size: 2rem;
+  color: #03DAC5 !important;
 }
 
 .app_dropdown {
-  background-color: white;
+  background-color: #1f1f1f;
 }
 
 .app__left {
@@ -56,6 +57,20 @@ body {
   /* flex-grow: 1; */
   margin-top: 20px;
   height: 280px;
+}
+
+.MuiCard-root {
+  background-color: #1f1f1f !important;
+  color: #fff !important;
+}
+
+.MuiSelect-root {
+  color: #fff !important;
+}
+
+.MuiMenu-paper {
+  background-color: #1f1f1f !important;
+  color: #fff !important;
 }
 
 @media (max-width: 990px) {
