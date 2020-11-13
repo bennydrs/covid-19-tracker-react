@@ -70,8 +70,9 @@ function App() {
   return (
     <div className="app">
       <div className="app__left">
+          <Card className="app__cardHeader">
         <div className="app__header">
-          <h2>Covid 19</h2>
+              <h2>Covid 19</h2>
           <FormControl className="app_dropdown">
             <Select variant="outlined" onChange={onCountryChange} value={country} >
               <MenuItem value="worldwide">Worldwide</MenuItem>
@@ -81,6 +82,8 @@ function App() {
             </Select>
           </FormControl>
         </div>
+          </Card>
+          
 
         <div className="app__stats">
           <InfoBox

@@ -16,7 +16,11 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+}
+
+.app__cardHeader {
+  margin-bottom: 15px;
+  padding: 8px;
 }
 
 .app__header > h2 {
@@ -50,7 +54,7 @@ body {
 
 .app__worldwide {
   margin-top: 15px;
-  height: 350px;
+  height: 360px;
 }
 
 .graph {
@@ -68,9 +72,25 @@ body {
   color: #fff !important;
 }
 
+.MuiOutlinedInput-notchedOutline {
+  border-color: #333 !important; /* border color */
+}
+.MuiSelect-icon {
+  color: #ccc !important; /* icon drop down icon color */
+}
+.MuiInputLabel-root {
+  color: #ccc !important; /* for lable color */
+}
+
 .MuiMenu-paper {
   background-color: #1f1f1f !important;
   color: #fff !important;
+}
+
+.leaflet-touch .leaflet-bar a {
+  width: 50px;
+  background-color: #1f1f1f;
+  color: #fff;
 }
 
 @media (max-width: 990px) {
