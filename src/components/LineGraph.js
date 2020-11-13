@@ -83,14 +83,23 @@ const LineGraph = ({ casesType = 'cases' }) => {
     fetchData();
   }, [casesType]);
 
+  const backgroundColor = () => {
+    if (casesType === "cases") {
+      return "210, 44, 44"
+    } else if (casesType === "recovered") {
+      return "154, 205, 50"
+    } 
+    return '110, 27, 9'
+  }
+
   return (
     <div className="graph">
       {data?.length > 0 && (
         <Line options={options} data={{ 
           datasets: [
             {
-              backgroundColor: "rgba(204, 16, 52, 0.6)",
-              borderColor: "#CC1034",
+              backgroundColor: `rgba(${backgroundColor()}, 0.6)`,
+              borderColor: `rgb(${backgroundColor()})`,
               data: data
             }
           ]

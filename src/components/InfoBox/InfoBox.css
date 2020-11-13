@@ -1,7 +1,41 @@
 .infoBox {
   flex: 1;
+  cursor: pointer;
 }
 
 .infoBox:not(:last-child) {
-  margin-right: 10px;
+  margin-right: 15px;
+}
+
+.infoBox__cases {
+  color: lightgreen;
+  font-weight: 600;
+  font-size: 1.75rem;
+  margin-bottom: .5rem;
+}
+
+.infoBox__total {
+  color: teal;
+  font-weight: 700 !important;
+  font-size: .8rem !important;
+  margin-top: 15px !important;
+}
+
+.infoBox__selected {
+  border-bottom: 10px solid yellowgreen;
+}
+
+.infoBox__red {
+  border-color: #D22C2C;
+}
+
+.infoBox__copper {
+  border-color: #6E1B09;
+}
+
+.info__cases__red {
+  color: #D22C2C !important;
+}
+.info__cases__copper {
+  color: #6E1B09;
 }

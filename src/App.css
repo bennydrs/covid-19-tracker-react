@@ -19,6 +19,14 @@ body {
   margin-bottom: 20px;
 }
 
+.app__header > h2 {
+  font-size: 2rem;
+}
+
+.app_dropdown {
+  background-color: white;
+}
+
 .app__left {
   flex: .9;
 }
@@ -28,9 +36,26 @@ body {
   justify-content: space-between;
 }
 
+/* .app__right {
+  display: flex;
+  justify-content: space-between;
+}
+
+.app__right .MuiCardContent-root {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}*/
+
+.app__worldwide {
+  margin-top: 15px;
+  height: 350px;
+}
+
 .graph {
+  /* flex-grow: 1; */
   margin-top: 20px;
-  height: 300px;
+  height: 280px;
 }
 
 @media (max-width: 990px) {
