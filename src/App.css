@@ -4,6 +4,7 @@
 
 body {
   background-color: #111;
+  min-height: 100vh;
 }
 
 .app {
@@ -33,34 +34,36 @@ body {
 }
 
 .app__left {
-  flex: .9;
+  flex: .8;
+  margin-right: 15px;
 }
 
 .app__stats {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
-/* .app__right {
+.app__right {
+  flex: .2;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 
 .app__right .MuiCardContent-root {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-}*/
+}
 
 .app__worldwide {
   margin-top: 15px;
-  height: 360px;
+  flex-grow: 9;
 }
 
-.graph {
-  /* flex-grow: 1; */
-  margin-top: 20px;
-  height: 280px;
+.app__graph {
+  flex-grow: 1;
+  margin-top: 15px;
+  height: 300px;
 }
 
 .MuiCard-root {
@@ -68,23 +71,28 @@ body {
   color: #fff !important;
 }
 
-.MuiSelect-root {
+/* autocomplete */
+.MuiInputBase-root {
   color: #fff !important;
+}
+.MuiAutocomplete-listbox {
+  background-color: #1f1f1f !important;
+}
+.MuiAutocomplete-option {
+  color: #fff !important;
+  background-color: #1f1f1f !important;
+}
+.MuiAutocomplete-option[data-focus="true"],
+.MuiAutocomplete-option[aria-selected="true"] {
+  color: #fff !important;
+  background-color: #333 !important;
 }
 
 .MuiOutlinedInput-notchedOutline {
   border-color: #333 !important; /* border color */
 }
-.MuiSelect-icon {
+.MuiButtonBase-root {
   color: #ccc !important; /* icon drop down icon color */
-}
-.MuiInputLabel-root {
-  color: #ccc !important; /* for lable color */
-}
-
-.MuiMenu-paper {
-  background-color: #1f1f1f !important;
-  color: #fff !important;
 }
 
 .leaflet-touch .leaflet-bar a {
@@ -96,5 +104,13 @@ body {
 @media (max-width: 990px) {
   .app {
     flex-direction: column;
+  }
+
+  .app__left {
+    margin-right: 0;
+  }
+
+  .app__right {
+    margin-top: 15px;
   }
 }

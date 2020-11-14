@@ -5,12 +5,16 @@ import { numberPrintStat } from './../../util';
 const Table = ({ countries }) => {
   return (
     <div className="table">
-      {countries.map(({country, cases}) =>(
-        <tr>
-          <td>{country}</td>
-          <td className="table__cases"><strong>{numberPrintStat(cases)}</strong></td>
-        </tr>
-      ))}
+      <table>
+        <tbody>
+          {countries.map(({ country, cases }) => (
+            <tr key={country}>
+              <td>{country}</td>
+              <td className="table__cases"><strong>{numberPrintStat(cases)}</strong></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   )
 }

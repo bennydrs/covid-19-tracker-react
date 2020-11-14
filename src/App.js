@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MenuItem, FormControl, Select, Card, CardContent } from '@material-ui/core';
+import { Card, CardContent, TextField } from '@material-ui/core';
 import './App.css';
 import InfoBox from './components/InfoBox/InfoBox';
 import Map from './components/Map/Map';
@@ -7,6 +7,7 @@ import Table from './components/Table/Table';
 import { sortData, prettyPrintStat, numberPrintStat } from './util';
 import LineGraph from './components/LineGraph';
 import 'leaflet/dist/leaflet.css';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -17,6 +18,7 @@ function App() {
   const [mapZoom, setMapZoom] = useState(2);
   const [mapCountries, setMapCountries] = useState([]);
   const [casesType, setCasesType] = useState('cases');
+  const [value, setValue] = useState({name: 'Worldwide', value: 'worldwide'});
 
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all")
@@ -38,22 +40,24 @@ function App() {
             }
           ));
           const sortedData = sortData(data);
+          const newCountries = [value].concat(countries)
           setTableData(sortedData);
           setMapCountries(data);
-          setCountries(countries)
+          setCountries(newCountries)
         })
     }
     getCountriesData();
   }, []);
 
-  const onCountryChange = async (e) => {
-    const countryCode = e.target.value;
-
+useEffect(() => {
+  const onCountryChange = async () => {
+    const countryCode = value.value;
+  
     const url = countryCode === "worldwide"
-        ? "https://disease.sh/v3/covid-19/all"
-        : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
-
-     await fetch(url)
+      ? "https://disease.sh/v3/covid-19/all"
+      : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
+  
+    await fetch(url)
       .then((response) => response.json())
       .then((data) => {
         setCountry(countryCode);
@@ -66,69 +70,89 @@ function App() {
         }, 200);
       });
   };
+  onCountryChange()
+}, [value])
+  
 
-  return (
-    <div className="app">
-      <div className="app__left">
-          <Card className="app__cardHeader">
+return (
+  <div className="app">
+    <div className="app__left">
+      <Card className="app__cardHeader">
         <div className="app__header">
-              <h2>Covid 19</h2>
-          <FormControl className="app_dropdown">
-            <Select variant="outlined" onChange={onCountryChange} value={country} >
-              <MenuItem value="worldwide">Worldwide</MenuItem>
-              {countries.map(country => (
-                <MenuItem value={country.value} key={country.value}>{country.name}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </div>
-          </Card>
-          
-
-        <div className="app__stats">
-          <InfoBox
-            isRed
-            active={casesType === "cases"}
-            onClick={(e) => setCasesType("cases")}
-            title="Coronavirus Cases"
-            cases={prettyPrintStat(countryInfo.todayCases)}
-            total={numberPrintStat(countryInfo.cases)}
-          />
-          <InfoBox
-            active={casesType === "recovered"}
-            onClick={(e) => setCasesType("recovered")}
-            title="Recovered"
-            cases={prettyPrintStat(countryInfo.todayRecovered)}
-            total={numberPrintStat(countryInfo.recovered)}
-          />
-          <InfoBox
-            isCopper
-            active={casesType === "deaths"}
-            onClick={(e) => setCasesType("deaths")}
-            title="Deaths"
-            cases={prettyPrintStat(countryInfo.todayDeaths)}
-            total={numberPrintStat(countryInfo.deaths)}
+          <h2>Covid 19</h2>
+          <Autocomplete
+            value={value}
+            id="empty-string-demo"
+            options={countries}
+            getOptionLabel={option => option.name ? option.name : ''}
+            getOptionSelected={(option, value) => {
+              //nothing that is put in here will cause the warning to go away
+              if (value === "") {
+                return true;
+              } else if (value === option) {
+                return true;
+              }
+            }}
+            onChange={(e, selectedObject) => {
+              if (selectedObject !== null){
+                setValue(selectedObject)}
+            }}
+            renderOption={option => option.name}
+            style={{ width: 250 }}
+            renderInput={params => (
+              <TextField 
+                {...params}
+                variant="outlined"
+              />
+            )}
           />
         </div>
-        <Map casesType={casesType} countries={mapCountries} center={mapCenter} zoom={mapZoom} />
-      </div>
-      <div className="app__right">
-        <Card>
-          <CardContent>
-            <h3>Live Cases by Country</h3>
-            <Table countries={tableData} />
-          </CardContent>
-        </Card>
-        <Card className="app__worldwide">
-          <CardContent>
-            <h3>Worldwide new {casesType}</h3>
-            <LineGraph casesType={casesType} />
-          </CardContent>
-        </Card>
-      </div>
+      </Card>
 
+      <div className="app__stats">
+        <InfoBox
+          isRed
+          active={casesType === "cases"}
+          onClick={(e) => setCasesType("cases")}
+          title="Cases"
+          cases={prettyPrintStat(countryInfo.todayCases)}
+          total={numberPrintStat(countryInfo.cases)}
+        />
+        <InfoBox
+          active={casesType === "recovered"}
+          onClick={(e) => setCasesType("recovered")}
+          title="Recovered"
+          cases={prettyPrintStat(countryInfo.todayRecovered)}
+          total={numberPrintStat(countryInfo.recovered)}
+        />
+        <InfoBox
+          isCopper
+          active={casesType === "deaths"}
+          onClick={(e) => setCasesType("deaths")}
+          title="Deaths"
+          cases={prettyPrintStat(countryInfo.todayDeaths)}
+          total={numberPrintStat(countryInfo.deaths)}
+        />
+      </div>
+      <Map casesType={casesType} countries={mapCountries} center={mapCenter} zoom={mapZoom} />
     </div>
-  );
+    <div className="app__right">
+      <Card>
+        <CardContent>
+          <h3>Live Cases by Country</h3>
+          <Table countries={tableData} />
+        </CardContent>
+      </Card>
+      <Card className="app__worldwide">
+        <CardContent>
+          <h3>Worldwide new {casesType}</h3>
+          <LineGraph casesType={casesType} />
+        </CardContent>
+      </Card>
+    </div>
+
+  </div>
+);
 }
 
 export default App;

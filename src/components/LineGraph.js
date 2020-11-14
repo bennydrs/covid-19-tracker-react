@@ -93,9 +93,9 @@ const LineGraph = ({ casesType = 'cases' }) => {
   }
 
   return (
-    <div className="graph">
+    <div className="app__graph">
       {data?.length > 0 && (
-        <Line options={options} data={{ 
+        <Line className="graph" options={options} data={{ 
           datasets: [
             {
               backgroundColor: `rgba(${backgroundColor()}, 0.6)`,

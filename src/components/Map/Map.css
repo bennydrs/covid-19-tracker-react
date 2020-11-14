@@ -1,8 +1,7 @@
 .map {
-  height: 600px;
-  background-color: #fff;
+  height: 620px;
   padding: 1rem;
-  margin-top: 16px;
+  margin-top: 15px;
 }
 
 .map .leaflet-container {
@@ -23,7 +22,7 @@
 .info-name {
   font-size: 20px;
   font-weight: bold;
-  color: #555;
+  color: #eee;
 }
 
 .info-confirmed,
@@ -31,4 +30,9 @@
 .info-deaths {
   font-size: 16px;
   margin-top: 5px;
+  color: #bbb;
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: #1f1f1f !important;
 }
