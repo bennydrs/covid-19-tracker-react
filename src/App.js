@@ -134,7 +134,7 @@ return (
           total={numberPrintStat(countryInfo.deaths)}
         />
       </div>
-      <Map casesType={casesType} countries={mapCountries} center={mapCenter} zoom={mapZoom} />
+      <Map casesType={casesType} countries={mapCountries} center={mapCenter} zoom={mapZoom} country={ value.name } />
     </div>
     <div className="app__right">
       <Card>
