@@ -6,9 +6,14 @@
   color: #ddd;
 }
 
+table {
+  width: 100%;
+}
+
 .table tr {
   display: flex;
   justify-content: space-between;
+  
 }
 
 .table td {
