@@ -7,6 +7,7 @@
 .infoBox {
   flex: 1;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .infoBox:not(:last-child) {
@@ -46,6 +47,7 @@
 .info__cases__red {
   color: var(--cases_col) !important;
 }
+
 .info__cases__copper {
   color: var(--death_col);
 }

@@ -85,7 +85,6 @@ function App() {
             <h2 onClick={refreshPage}>COVID-19</h2>
             <Autocomplete
               value={value}
-              id="empty-string-demo"
               options={countries}
               getOptionLabel={option => option.name ? option.name : ''}
               getOptionSelected={(option, value) => {
@@ -102,7 +101,7 @@ function App() {
                 }
               }}
               renderOption={option => option.name}
-              style={{ width: 250 }}
+              style={{ width: 220 }}
               renderInput={params => (
                 <TextField
                   {...params}

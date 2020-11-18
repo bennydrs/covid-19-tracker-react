@@ -25,7 +25,7 @@ body {
 }
 
 .app__header > h2 {
-  font-size: 2rem;
+  font-size: 1rem;
   color: #03DAC5 !important;
   cursor: pointer;
 }
@@ -97,9 +97,13 @@ body {
 }
 
 .leaflet-touch .leaflet-bar a {
-  width: 50px;
   background-color: #1f1f1f;
   color: #fff;
+}
+
+.leaflet-touch .leaflet-bar a:hover {
+  background-color: #fff;
+  color: #000;
 }
 
 .leaflet-control-zoom-fullscreen {
@@ -121,5 +125,11 @@ body {
 
   .app__right {
     margin-top: 15px;
+  }
+}
+
+@media (min-width: 600px) {
+  .app__header > h2 {
+    font-size: 2rem;
   }
 }
