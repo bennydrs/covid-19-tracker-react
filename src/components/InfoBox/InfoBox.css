@@ -1,7 +1,7 @@
 :root {
   --cases_col: red;
   --recovered_col: green;
-  --death_col: #B00020;
+  --death_col: #b00020;
 }
 
 .infoBox {
@@ -18,7 +18,7 @@
   color: var(--recovered_col);
   font-weight: 600;
   font-size: 1.75rem;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .infoBox__title {
@@ -28,7 +28,7 @@
 .infoBox__total {
   color: var(--recovered_col);
   font-weight: 700 !important;
-  font-size: .8rem !important;
+  font-size: 0.8rem !important;
   margin-top: 15px !important;
 }
 
@@ -50,4 +50,25 @@
 
 .info__cases__copper {
   color: var(--death_col);
+}
+
+@media only screen and (max-width: 600px) {
+  .infoBox {
+    text-align: center;
+  }
+
+  .infoBox__cases {
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-bottom: 0;
+    padding: 0 !important;
+  }
+
+  .MuiCardContent-root {
+    padding: 10px !important;
+  }
+
+  .infoBox__title {
+    margin-bottom: 12px !important;
+  }
 }

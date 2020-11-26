@@ -1,51 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, TextField } from '@material-ui/core';
-import './App.css';
-import InfoBox from './components/InfoBox/InfoBox';
-import Map from './components/Map/Map';
-import Table from './components/Table/Table';
-import { sortData, prettyPrintStat, numberPrintStat } from './util';
-import LineGraph from './components/LineGraph';
-import 'leaflet/dist/leaflet.css';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import React, { useState, useEffect } from "react";
+import { Card, CardContent, TextField } from "@material-ui/core";
+import "./App.css";
+import InfoBox from "./components/InfoBox/InfoBox";
+import Map from "./components/Map/Map";
+import Table from "./components/Table/Table";
+import { sortData, prettyPrintStat, numberPrintStat } from "./util";
+import LineGraph from "./components/LineGraph";
+import "leaflet/dist/leaflet.css";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 
 function App() {
   const [countries, setCountries] = useState([]);
-  const [country, setCountry] = useState('worldwide');
+  const [country, setCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
   const [mapCenter, setMapCenter] = useState([20.8628, 30.2176]);
   const [mapZoom, setMapZoom] = useState(2);
   const [mapCountries, setMapCountries] = useState([]);
-  const [casesType, setCasesType] = useState('cases');
-  const [value, setValue] = useState({ name: 'Worldwide', value: 'worldwide' });
+  const [casesType, setCasesType] = useState("cases");
+  const [value, setValue] = useState({ name: "Worldwide", value: "worldwide" });
 
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all")
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         setCountryInfo(data);
-      })
-  }, [])
+      });
+  }, []);
 
   useEffect(() => {
     const getCountriesData = async () => {
       await fetch("https://disease.sh/v3/covid-19/countries")
-        .then(response => response.json())
-        .then(data => {
-          const countries = data.map(country => (
-            {
-              name: country.country,
-              value: country.countryInfo.iso2
-            }
-          ));
+        .then((response) => response.json())
+        .then((data) => {
+          const countries = data.map((country) => ({
+            name: country.country,
+            value: country.countryInfo.iso2,
+          }));
           const sortedData = sortData(data);
-          const newCountries = [value].concat(countries)
+          const newCountries = [value].concat(countries);
           setTableData(sortedData);
           setMapCountries(data);
-          setCountries(newCountries)
-        })
-    }
+          setCountries(newCountries);
+        });
+    };
     getCountriesData();
   }, []);
 
@@ -53,9 +51,10 @@ function App() {
     const onCountryChange = async () => {
       const countryCode = value.value;
 
-      const url = countryCode === "worldwide"
-        ? "https://disease.sh/v3/covid-19/all"
-        : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
+      const url =
+        countryCode === "worldwide"
+          ? "https://disease.sh/v3/covid-19/all"
+          : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
 
       await fetch(url)
         .then((response) => response.json())
@@ -70,23 +69,26 @@ function App() {
           }, 200);
         });
     };
-    onCountryChange()
-  }, [value])
+    onCountryChange();
+  }, [value]);
 
   const refreshPage = () => {
     window.location.reload(false);
-  }
+  };
 
   return (
     <div className="app">
       <div className="app__left">
         <Card className="app__cardHeader">
           <div className="app__header">
-            <h2 onClick={refreshPage}>COVID-19</h2>
+            <h2 onClick={refreshPage}>
+              COVID<span className="dash">-</span>
+              <span className="nineteen">19</span>
+            </h2>
             <Autocomplete
               value={value}
               options={countries}
-              getOptionLabel={option => option.name ? option.name : ''}
+              getOptionLabel={(option) => (option.name ? option.name : "")}
               getOptionSelected={(option, value) => {
                 //nothing that is put in here will cause the warning to go away
                 if (value === "") {
@@ -97,16 +99,13 @@ function App() {
               }}
               onChange={(e, selectedObject) => {
                 if (selectedObject !== null) {
-                  setValue(selectedObject)
+                  setValue(selectedObject);
                 }
               }}
-              renderOption={option => option.name}
+              renderOption={(option) => option.name}
               style={{ width: 220 }}
-              renderInput={params => (
-                <TextField
-                  {...params}
-                  variant="outlined"
-                />
+              renderInput={(params) => (
+                <TextField {...params} variant="outlined" />
               )}
             />
           </div>
@@ -137,7 +136,13 @@ function App() {
             total={numberPrintStat(countryInfo.deaths)}
           />
         </div>
-        <Map casesType={casesType} countries={mapCountries} center={mapCenter} zoom={mapZoom} country={value.name} />
+        <Map
+          casesType={casesType}
+          countries={mapCountries}
+          center={mapCenter}
+          zoom={mapZoom}
+          country={value.name}
+        />
       </div>
       <div className="app__right">
         <Card>
@@ -153,7 +158,6 @@ function App() {
           </CardContent>
         </Card>
       </div>
-
     </div>
   );
 }

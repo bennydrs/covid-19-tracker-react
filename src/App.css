@@ -26,8 +26,16 @@ body {
 
 .app__header > h2 {
   font-size: 1rem;
-  color: #03DAC5 !important;
+  color: #fff !important;
   cursor: pointer;
+}
+
+.app__header > h2 > span.dash {
+  color: gray;
+}
+
+.app__header > h2 > span.nineteen {
+  color: red;
 }
 
 .app_dropdown {
@@ -35,7 +43,7 @@ body {
 }
 
 .app__left {
-  flex: .8;
+  flex: 0.8;
   margin-right: 15px;
 }
 
@@ -45,7 +53,7 @@ body {
 }
 
 .app__right {
-  flex: .2;
+  flex: 0.2;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -107,11 +115,11 @@ body {
 }
 
 .leaflet-control-zoom-fullscreen {
-  background-image: url('/src/img/fullscreen-white.svg') !important;
+  background-image: url("/src/img/fullscreen-white.svg") !important;
   background-size: 26px;
-} 
+}
 .leaflet-control-zoom-fullscreen:hover {
-  background-image: url('/src/img/fullscreen-black.svg') !important;
+  background-image: url("/src/img/fullscreen-black.svg") !important;
 }
 
 @media (max-width: 990px) {
