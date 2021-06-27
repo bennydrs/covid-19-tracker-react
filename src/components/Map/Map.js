@@ -1,10 +1,9 @@
-import React from "react";
-import "./Map.css";
-import { Map as LafletMap, TileLayer } from "react-leaflet";
-import { Card } from "@material-ui/core";
-import { showDataOnMap, showDataOnMapWW } from "./../../util";
-import "react-leaflet-fullscreen/dist/styles.css";
-import FullscreenControl from "react-leaflet-fullscreen";
+import { Card } from "@material-ui/core"
+import { Map as LafletMap, TileLayer } from "react-leaflet"
+import FullscreenControl from "react-leaflet-fullscreen"
+import "react-leaflet-fullscreen/dist/styles.css"
+import { showDataOnMap, showDataOnMapWW } from "./../../util"
+import "./Map.css"
 
 const Map = ({ countries, casesType, center, zoom, country }) => {
   return (
@@ -21,7 +20,7 @@ const Map = ({ countries, casesType, center, zoom, country }) => {
           : showDataOnMap(countries, casesType, country)}
       </LafletMap>
     </Card>
-  );
-};
+  )
+}
 
-export default Map;
+export default Map

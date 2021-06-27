@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Line } from "react-chartjs-2";
-import numeral from "numeral";
+// @ts-nocheck
+import numeral from "numeral"
+import { useEffect, useState } from "react"
+import { Line } from "react-chartjs-2"
+import { casesCol, deathsCol, recoveredCol } from "../util"
 
 const options = {
   responsive: true,
@@ -18,7 +20,7 @@ const options = {
     intersect: false,
     callbacks: {
       label: function (tooltipItem, data) {
-        return numeral(tooltipItem.value).format("+0,0");
+        return numeral(tooltipItem.value).format("+0,0")
       },
     },
   },
@@ -39,60 +41,60 @@ const options = {
         },
         ticks: {
           callback: function (value, index, values) {
-            return numeral(value).format("0a");
+            return numeral(value).format("0a")
           },
         },
       },
     ],
   },
-};
+}
 
 const LineGraph = ({ casesType = "cases" }) => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({})
 
   // build data format for chart
   const buildChartData = (data, casesType) => {
-    const chartData = [];
-    let lastDataPoint;
+    const chartData = []
+    let lastDataPoint
 
     for (let date in data.cases) {
       if (lastDataPoint) {
         const newDataPoint = {
           x: date,
           y: data[casesType][date] - lastDataPoint,
-        };
-        chartData.push(newDataPoint);
+        }
+        chartData.push(newDataPoint)
       }
-      lastDataPoint = data[casesType][date];
+      lastDataPoint = data[casesType][date]
     }
-    return chartData;
-  };
+    return chartData
+  }
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetch(" https://disease.sh/v3/covid-19/historical/all?lastday=120")
+      await fetch("https://disease.sh/v3/covid-19/historical/all?lastday=120")
         .then((res) => res.json())
         .then((data) => {
-          const chartData = buildChartData(data, casesType);
-          setData(chartData);
-        });
-    };
-
-    fetchData();
-  }, [casesType]);
+          const chartData = buildChartData(data, casesType)
+          setData(chartData)
+        })
+    }
+    fetchData()
+  }, [casesType])
 
   const backgroundColor = () => {
     if (casesType === "cases") {
-      return "255, 0, 0";
+      return casesCol.rgbNum
     } else if (casesType === "recovered") {
-      return "0, 128, 0";
+      return recoveredCol.rgbNum
     }
-    return "176, 0, 32";
-  };
+    return deathsCol.rgbNum
+  }
 
   return (
     <div className="app__graph">
       {data?.length > 0 && (
+        // @ts-ignore
         <Line
           className="graph"
           options={options}
@@ -108,7 +110,7 @@ const LineGraph = ({ casesType = "cases" }) => {
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default LineGraph;
+export default LineGraph

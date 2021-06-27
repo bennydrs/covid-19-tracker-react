@@ -1,13 +1,21 @@
 :root {
-  --cases_col: red;
-  --recovered_col: green;
-  --death_col: #b00020;
+  --cases_col: #ff5722;
+  /* --cases_col: rgb(255, 87, 34); */
+  --recovered_col: #2e7d32;
+  /* --recovered_col: rgb(46, 125, 50); */
+  --death_col: #c62828;
+  /* --death_col: rgb(198, 40, 40); */
 }
 
 .infoBox {
   flex: 1;
   cursor: pointer;
+  height: 135px;
   box-sizing: border-box;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .infoBox:hover {
@@ -27,17 +35,17 @@
 
 .infoBox__title {
   color: #fff !important;
+  font-weight: 300 !important;
 }
 
 .infoBox__total {
   color: var(--recovered_col);
-  font-weight: 700 !important;
-  font-size: 0.8rem !important;
-  margin-top: 15px !important;
+  font-weight: 400 !important;
+  font-size: 0.9rem !important;
 }
 
 .infoBox__selected {
-  border-bottom: 10px solid var(--recovered_col);
+  border-bottom: 6px solid var(--recovered_col);
 }
 
 .infoBox__red {
@@ -56,23 +64,25 @@
   color: var(--death_col);
 }
 
-@media only screen and (max-width: 600px) {
+@media (max-width: 600px) {
   .infoBox {
-    text-align: center;
+    /* text-align: center; */
+    padding: 12px 10px;
   }
 
   .infoBox__cases {
     font-weight: 600;
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     margin-bottom: 0;
     padding: 0 !important;
   }
 
-  .MuiCardContent-root {
-    padding: 10px !important;
+  .infoBox__title {
+    /* margin-bottom: 12px !important; */
+    font-size: 14px !important;
   }
 
-  .infoBox__title {
-    margin-bottom: 12px !important;
+  .infoBox__total {
+    font-size: 0.75rem !important;
   }
 }

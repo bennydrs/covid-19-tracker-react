@@ -1,16 +1,32 @@
-import React from 'react';
-import './Table.css';
-import { numberPrintStat } from './../../util';
+import { numberPrintStat, sortData } from "./../../util"
+import "./Table.css"
 
-const Table = ({ countries }) => {
+const Table = ({ countries, casesType = "cases" }) => {
+  const countiesSorted = sortData(countries, casesType)
+
+  const color = () => {
+    if (casesType === "cases") {
+      return "table__cases_col"
+    } else if (casesType === "recovered") {
+      return "table__recovered_col"
+    }
+    return "table__deaths_col"
+  }
+
   return (
     <div className="table">
       <table>
         <tbody>
-          {countries.map(({ country, cases }) => (
+          {countiesSorted.map(({ country, cases, recovered, deaths }) => (
             <tr key={country}>
               <td>{country}</td>
-              <td className="table__cases"><strong>{numberPrintStat(cases)}</strong></td>
+              <td className="table__cases">
+                <strong className={color()}>
+                  {numberPrintStat(
+                    casesType === "cases" ? cases : casesType === "recovered" ? recovered : deaths
+                  )}
+                </strong>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -19,4 +35,4 @@ const Table = ({ countries }) => {
   )
 }
 
-export default Table;
+export default Table
