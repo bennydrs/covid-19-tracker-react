@@ -1,0 +1,58 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.header__cardHeader {
+  margin-bottom: 15px;
+  padding: 8px;
+}
+
+.header > h2 {
+  font-size: 2rem;
+  color: #fff !important;
+  cursor: pointer;
+}
+
+.header > h2 > span.dash {
+  color: gray;
+}
+
+.header > h2 > span.nineteen {
+  color: red;
+}
+
+/* autocomplete */
+/* .MuiAutocomplete-root {
+  width: 200px !important;
+} */
+.MuiInputBase-root {
+  color: #fff !important;
+}
+.MuiAutocomplete-listbox {
+  background-color: #1f1f1f !important;
+}
+.MuiAutocomplete-option {
+  color: #fff !important;
+  background-color: #1f1f1f !important;
+}
+.MuiAutocomplete-option[data-focus="true"],
+.MuiAutocomplete-option[aria-selected="true"] {
+  color: #fff !important;
+  background-color: #333 !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: #333 !important; /* border color */
+}
+.MuiButtonBase-root {
+  color: #ccc !important; /* icon drop down icon color */
+}
+
+@media (min-width: 600px) {
+  .header > h2 {
+    font-size: 2rem;
+  }
+}

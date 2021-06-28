@@ -1,9 +1,9 @@
 // @ts-nocheck
-import { Card, CardContent, Grid, Hidden, TextField } from "@material-ui/core"
-import Autocomplete from "@material-ui/lab/Autocomplete"
+import { Card, CardContent, Grid } from "@material-ui/core"
 import "leaflet/dist/leaflet.css"
 import { useEffect, useState } from "react"
 import "./App.css"
+import Header from "./components/Header/Header"
 import InfoBox from "./components/InfoBox/InfoBox"
 import LineGraph from "./components/LineGraph"
 import Map from "./components/Map/Map"
@@ -73,45 +73,11 @@ function App() {
     onCountryChange()
   }, [value])
 
-  const refreshPage = () => {
-    window.location.reload(false)
-  }
-
   return (
     <div className="app">
       <Grid container spacing={2}>
         <Grid item xs={12} md={9}>
-          <Card className="app__cardHeader">
-            <div className="app__header">
-              <h2 onClick={refreshPage}>
-                <Hidden mdDown>COVID</Hidden>
-                <Hidden mdUp>C</Hidden>
-                <span className="dash">-</span>
-                <span className="nineteen">19</span>
-              </h2>
-              <Autocomplete
-                value={value}
-                options={countries}
-                getOptionLabel={(option) => (option.name ? option.name : "")}
-                getOptionSelected={(option, value) => {
-                  //nothing that is put in here will cause the warning to go away
-                  if (value === "") {
-                    return true
-                  } else if (value === option) {
-                    return true
-                  }
-                }}
-                onChange={(e, selectedObject) => {
-                  if (selectedObject !== null) {
-                    setValue(selectedObject)
-                  }
-                }}
-                renderOption={(option) => option.name}
-                style={{ width: 220 }}
-                renderInput={(params) => <TextField {...params} variant="outlined" />}
-              />
-            </div>
-          </Card>
+          <Header value={value} countries={countries} setValue={setValue} />
 
           <div className="app__stats">
             <InfoBox
@@ -138,6 +104,7 @@ function App() {
               total={numberPrintStat(countryInfo.deaths)}
             />
           </div>
+
           <Map
             casesType={casesType}
             countries={mapCountries}
@@ -155,7 +122,7 @@ function App() {
           </Card>
           <Card className="app__worldwide">
             <CardContent>
-              <h3>Worldwide New {capitalize(casesType)}</h3>
+              <h3>Worldwide {capitalize(casesType)}</h3>
               <LineGraph casesType={casesType} />
             </CardContent>
           </Card>
