@@ -2,7 +2,7 @@
 import { Card, CardContent, Grid, Hidden, TextField } from "@material-ui/core"
 import Autocomplete from "@material-ui/lab/Autocomplete"
 import "leaflet/dist/leaflet.css"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import "./App.css"
 import InfoBox from "./components/InfoBox/InfoBox"
 import LineGraph from "./components/LineGraph"
