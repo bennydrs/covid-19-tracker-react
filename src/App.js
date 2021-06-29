@@ -46,7 +46,7 @@ function App() {
         })
     }
     getCountriesData()
-  }, [])
+  }, [value])
 
   useEffect(() => {
     const onCountryChange = async () => {
@@ -73,12 +73,18 @@ function App() {
     onCountryChange()
   }, [value])
 
+  useEffect(() => {
+    const updateVisitor = () => {
+      fetch("https://api.countapi.xyz/update/tracking-covid19/website-bd/?amount=1")
+    }
+    updateVisitor()
+  }, [])
+
   return (
     <div className="app">
       <Grid container spacing={2}>
         <Grid item xs={12} md={9}>
           <Header value={value} countries={countries} setValue={setValue} />
-
           <div className="app__stats">
             <InfoBox
               isRed
