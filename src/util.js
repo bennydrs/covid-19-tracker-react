@@ -38,7 +38,7 @@ const casesTypeColors = {
   },
 }
 
-export const prettyPrintStat = (stat) => (stat ? `+${numeral(stat).format("0.0a")}` : "+0")
+export const prettyPrintStat = (stat) => (stat ? `${numeral(stat).format("0.0a")}` : "0")
 
 export const numberPrintStat = (stat) => (stat ? `${numeral(stat).format("0,0")}` : "+0")
 
@@ -83,3 +83,31 @@ export const showDataOnMapWW = (data, casesType = "cases") =>
   data.map((country) => showToMap(country, casesType))
 
 export const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1)
+
+export const timeSince = (date) => {
+  // @ts-ignore
+  const seconds = Math.floor((new Date() - date) / 1000)
+
+  let interval = seconds / 31536000
+
+  if (interval > 1) {
+    return Math.floor(interval) + " years"
+  }
+  interval = seconds / 2592000
+  if (interval > 1) {
+    return Math.floor(interval) + " months"
+  }
+  interval = seconds / 86400
+  if (interval > 1) {
+    return Math.floor(interval) + " days"
+  }
+  interval = seconds / 3600
+  if (interval > 1) {
+    return Math.floor(interval) + " hours"
+  }
+  interval = seconds / 60
+  if (interval > 1) {
+    return Math.floor(interval) + " minutes"
+  }
+  return Math.floor(seconds) + " seconds"
+}

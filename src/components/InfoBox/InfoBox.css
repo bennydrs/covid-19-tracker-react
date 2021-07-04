@@ -67,6 +67,7 @@
 @media (max-width: 600px) {
   .infoBox {
     /* text-align: center; */
+    min-width: 130px !important;
     padding: 12px 10px;
   }
 
@@ -84,5 +85,9 @@
 
   .infoBox__total {
     font-size: 0.75rem !important;
+  }
+
+  .infoBox__icon {
+    font-size: 14px;
   }
 }

@@ -46,13 +46,15 @@
 
 @media (max-width: 600px) {
   .map {
-    min-height: calc(100vh - 60px - 235px);
-    height: 500px;
-    padding: 0.7rem;
+    padding: 0.5rem;
+    /* min-height: calc(100vh - 60px - 235px); */
+    min-height: 300px;
+    height: 300px;
   }
 
   .map .leaflet-container {
-    min-height: calc(100vh - 60px - 235px);
-    height: 500px;
+    /* min-height: calc(100vh - 60px - 235px); */
+    min-height: 300px;
+    height: 300px;
   }
 }

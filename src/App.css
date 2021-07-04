@@ -13,7 +13,7 @@ body {
 
 .app__stats {
   display: flex;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
 }
 
 .app__worldwide {
@@ -70,9 +70,20 @@ body {
 
 @media (max-width: 600px) {
   .app {
-    padding: 14px;
+    padding: 16px;
   }
   .app__table {
     height: 465px;
+  }
+  .app__stats {
+    width: 100%;
+    padding: -1rem !important;
+    overflow-x: scroll;
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+  }
+
+  .app__stats::-webkit-scrollbar {
+    display: none;
   }
 }

@@ -1,7 +1,8 @@
+import PublicIcon from "@material-ui/icons/Public"
 import { numberPrintStat, sortData } from "./../../util"
 import "./Table.css"
 
-const Table = ({ countries, casesType = "cases" }) => {
+const Table = ({ countries, casesType = "cases", global }) => {
   const countiesSorted = sortData(countries, casesType)
 
   const color = () => {
@@ -14,24 +15,35 @@ const Table = ({ countries, casesType = "cases" }) => {
   }
 
   return (
-    <div className="table">
-      <table>
-        <tbody>
-          {countiesSorted.map(({ country, cases, recovered, deaths }) => (
-            <tr key={country}>
-              <td>{country}</td>
-              <td className="table__cases">
-                <strong className={color()}>
-                  {numberPrintStat(
-                    casesType === "cases" ? cases : casesType === "recovered" ? recovered : deaths
-                  )}
-                </strong>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <>
+      <div className="table_global">
+        <span>
+          <PublicIcon className="table_global_icon" /> Global
+        </span>
+        <strong className={color()}>{numberPrintStat(global[casesType])}</strong>
+      </div>
+      <div className="table">
+        <table>
+          <tbody>
+            {countiesSorted.map(({ country, countryInfo, cases, recovered, deaths }) => (
+              <tr key={country}>
+                <td className="country__table">
+                  <img src={countryInfo.flag} alt="" loading="lazy" width="25" height="15" />
+                  {country}
+                </td>
+                <td className="table__cases">
+                  <strong className={color()}>
+                    {numberPrintStat(
+                      casesType === "cases" ? cases : casesType === "recovered" ? recovered : deaths
+                    )}
+                  </strong>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   )
 }
 

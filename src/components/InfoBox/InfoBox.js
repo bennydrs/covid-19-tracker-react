@@ -1,4 +1,7 @@
 import { Card, Typography } from "@material-ui/core"
+import TrendingFlatIcon from "@material-ui/icons/TrendingFlat"
+import TrendingUpIcon from "@material-ui/icons/TrendingUp"
+import { prettyPrintStat } from "../../util"
 import "./InfoBox.css"
 
 const InfoBox = ({ title, cases, isRed, isCopper, active, total, ...props }) => {
@@ -16,7 +19,12 @@ const InfoBox = ({ title, cases, isRed, isCopper, active, total, ...props }) => 
           isCopper && "info__cases__copper"
         }`}
       >
-        {cases}
+        {cases > 0 ? (
+          <TrendingUpIcon className="infoBox__icon" />
+        ) : (
+          <TrendingFlatIcon className="infoBox__icon" />
+        )}{" "}
+        {prettyPrintStat(cases)}
       </h2>
 
       <Typography

@@ -1,18 +1,18 @@
 // @ts-nocheck
 import { Card, CardContent, Grid } from "@material-ui/core"
 import "leaflet/dist/leaflet.css"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import "./App.css"
 import Header from "./components/Header/Header"
 import InfoBox from "./components/InfoBox/InfoBox"
 import LineGraph from "./components/LineGraph"
 import Map from "./components/Map/Map"
 import Table from "./components/Table/Table"
-import { capitalize, numberPrintStat, prettyPrintStat, sortData } from "./util"
+import { capitalize, numberPrintStat, sortData } from "./util"
 
 function App() {
   const [countries, setCountries] = useState([])
-  const [country, setCountry] = useState("worldwide")
+  const [, setCountry] = useState("worldwide")
   const [countryInfo, setCountryInfo] = useState({})
   const [tableData, setTableData] = useState([])
   const [mapCenter, setMapCenter] = useState([20.8628, 30.2176])
@@ -20,12 +20,15 @@ function App() {
   const [mapCountries, setMapCountries] = useState([])
   const [casesType, setCasesType] = useState("cases")
   const [value, setValue] = useState({ name: "Worldwide", value: "worldwide" })
+  const [global, setGlobal] = useState(0)
+  const ref = useRef()
 
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all")
       .then((response) => response.json())
       .then((data) => {
         setCountryInfo(data)
+        setGlobal(data)
       })
   }, [])
 
@@ -46,7 +49,8 @@ function App() {
         })
     }
     getCountriesData()
-  }, [value])
+    // eslint-disable-next-line
+  }, [])
 
   useEffect(() => {
     const onCountryChange = async () => {
@@ -80,33 +84,53 @@ function App() {
     updateVisitor()
   }, [])
 
+  const [scrollWidth, setScrollWidth] = useState(0)
+
+  useEffect(() => {
+    setScrollWidth(ref.current.scrollWidth - ref.current.clientWidth)
+  }, [ref])
+
   return (
     <div className="app">
       <Grid container spacing={2}>
         <Grid item xs={12} md={9}>
-          <Header value={value} countries={countries} setValue={setValue} />
-          <div className="app__stats">
+          <Header
+            value={value}
+            countries={countries}
+            setValue={setValue}
+            countryInfo={countryInfo}
+          />
+          <div className="app__stats" ref={ref}>
             <InfoBox
               isRed
               active={casesType === "cases"}
-              onClick={() => setCasesType("cases")}
+              onClick={() => {
+                setCasesType("cases")
+                ref.current.scrollLeft = 0
+              }}
               title="Cases"
-              cases={prettyPrintStat(countryInfo.todayCases)}
+              cases={countryInfo.todayCases}
               total={numberPrintStat(countryInfo.cases)}
             />
             <InfoBox
               active={casesType === "recovered"}
-              onClick={() => setCasesType("recovered")}
+              onClick={() => {
+                setCasesType("recovered")
+                ref.current.scrollLeft = scrollWidth / 2
+              }}
               title="Recovered"
-              cases={prettyPrintStat(countryInfo.todayRecovered)}
+              cases={countryInfo.todayRecovered}
               total={numberPrintStat(countryInfo.recovered)}
             />
             <InfoBox
               isCopper
               active={casesType === "deaths"}
-              onClick={() => setCasesType("deaths")}
+              onClick={() => {
+                setCasesType("deaths")
+                ref.current.scrollLeft = scrollWidth
+              }}
               title="Deaths"
-              cases={prettyPrintStat(countryInfo.todayDeaths)}
+              cases={countryInfo.todayDeaths}
               total={numberPrintStat(countryInfo.deaths)}
             />
           </div>
@@ -122,8 +146,8 @@ function App() {
         <Grid item xs={12} md={3}>
           <Card className="app__table">
             <CardContent>
-              <h3>Live {capitalize(casesType)} by Country</h3>
-              <Table countries={tableData} casesType={casesType} />
+              <h3>{capitalize(casesType)} by Country</h3>
+              <Table countries={tableData} casesType={casesType} global={global} />
             </CardContent>
           </Card>
           <Card className="app__worldwide">
