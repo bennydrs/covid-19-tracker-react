@@ -76,6 +76,8 @@
     font-size: 1.3rem;
     margin-bottom: 0;
     padding: 0 !important;
+    display: flex;
+    align-items: center;
   }
 
   .infoBox__title {
@@ -89,5 +91,6 @@
 
   .infoBox__icon {
     font-size: 14px;
+    margin-right: 6px;
   }
 }

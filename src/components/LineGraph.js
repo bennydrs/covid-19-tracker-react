@@ -1,4 +1,5 @@
 // @ts-nocheck
+import { Alert } from "@material-ui/lab"
 import numeral from "numeral"
 import { useEffect, useState } from "react"
 import { Line } from "react-chartjs-2"
@@ -49,15 +50,16 @@ const options = {
   },
 }
 
-const LineGraph = ({ casesType = "cases" }) => {
+const LineGraph = ({ casesType = "cases", value }) => {
   const [data, setData] = useState({})
+  const [errMessage, setErrMessage] = useState("")
 
   // build data format for chart
   const buildChartData = (data, casesType) => {
     const chartData = []
     let lastDataPoint
 
-    for (let date in data.cases) {
+    for (let date in data?.cases) {
       if (lastDataPoint) {
         const newDataPoint = {
           x: date,
@@ -72,15 +74,29 @@ const LineGraph = ({ casesType = "cases" }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetch("https://disease.sh/v3/covid-19/historical/all?lastday=120")
+      setErrMessage("")
+      const countryCode = value.value
+
+      const url =
+        countryCode === "worldwide"
+          ? "https://disease.sh/v3/covid-19/historical/all?lastday=120"
+          : `https://disease.sh/v3/covid-19/historical/${countryCode}?lastdays=90`
+
+      await fetch(url)
         .then((res) => res.json())
         .then((data) => {
-          const chartData = buildChartData(data, casesType)
+          const chartData = buildChartData(
+            countryCode === "worldwide" ? data : data?.timeline,
+            casesType
+          )
           setData(chartData)
+          if (data.message) {
+            setErrMessage(data.message)
+          }
         })
     }
     fetchData()
-  }, [casesType])
+  }, [casesType, value])
 
   const backgroundColor = () => {
     if (casesType === "cases") {
@@ -108,6 +124,11 @@ const LineGraph = ({ casesType = "cases" }) => {
             ],
           }}
         />
+      )}
+      {errMessage && (
+        <Alert icon={false} severity="success">
+          {errMessage}
+        </Alert>
       )}
     </div>
   )

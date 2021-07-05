@@ -152,8 +152,10 @@ function App() {
           </Card>
           <Card className="app__worldwide">
             <CardContent>
-              <h3>Worldwide {capitalize(casesType)}</h3>
-              <LineGraph casesType={casesType} />
+              <h3>
+                {value.name} {capitalize(casesType)}
+              </h3>
+              <LineGraph casesType={casesType} value={value} />
             </CardContent>
           </Card>
         </Grid>

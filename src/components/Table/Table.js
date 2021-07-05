@@ -18,7 +18,7 @@ const Table = ({ countries, casesType = "cases", global }) => {
     <>
       <div className="table_global">
         <span>
-          <PublicIcon className="table_global_icon" /> Global
+          <PublicIcon className="table_global_icon" /> Worldwide
         </span>
         <strong className={color()}>{numberPrintStat(global[casesType])}</strong>
       </div>
