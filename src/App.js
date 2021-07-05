@@ -3,6 +3,7 @@ import { Card, CardContent, Grid } from "@material-ui/core"
 import "leaflet/dist/leaflet.css"
 import { useEffect, useRef, useState } from "react"
 import "./App.css"
+import FullScreenDialog from "./components/FullScreenDialog"
 import Header from "./components/Header/Header"
 import InfoBox from "./components/InfoBox/InfoBox"
 import LineGraph from "./components/LineGraph"
@@ -146,7 +147,10 @@ function App() {
         <Grid item xs={12} md={3}>
           <Card className="app__table">
             <CardContent>
-              <h3>{capitalize(casesType)} by Country</h3>
+              <div className="app__table__header">
+                <h3>{capitalize(casesType)} by Country</h3>
+                <FullScreenDialog />
+              </div>
               <Table countries={tableData} casesType={casesType} global={global} />
             </CardContent>
           </Card>
