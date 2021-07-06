@@ -12,11 +12,7 @@ import { withStyles } from "@material-ui/core/styles"
 import { numberPrintStat } from "../util"
 
 const useStyles = makeStyles(() => ({
-  table: {
-    minWidth: 700,
-    maxWidth: 1600,
-    margin: "0 auto",
-  },
+  table: { minWidth: 700, maxWidth: 1600, margin: "0 auto" },
   country: {
     display: "flex",
     alignItems: "center",
@@ -25,15 +21,17 @@ const useStyles = makeStyles(() => ({
       marginRight: 8,
     },
   },
-  tableContainer: {
-    backgroundColor: "#1f1f1f",
-  },
+  tableContainer: {},
 }))
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
+    [theme.breakpoints.down("md")]: {
+      paddingTop: 6,
+      paddingBottom: 6,
+    },
   },
   body: {
     fontSize: 15,
@@ -49,8 +47,9 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow)
 
-const TableDataCountry = ({ tableData }) => {
+const TableDataCountry = ({ tableData, searchTerm }) => {
   const classes = useStyles()
+  // const [searchTerm, setSearchTerm] = useState("")
 
   return (
     <TableContainer component={Paper} className={classes.tableContainer}>
@@ -67,25 +66,34 @@ const TableDataCountry = ({ tableData }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {tableData?.map((row, index) => (
-            <StyledTableRow key={index}>
-              <StyledTableCell className={classes.country}>
-                <img src={row.countryInfo.flag} alt="" loading="lazy" width="26" /> {row.country}
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                {numberPrintStat(row.cases)} ({numberPrintStat(row.todayCases)})
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                {numberPrintStat(row.recovered)} ({numberPrintStat(row.todayRecovered)})
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                {numberPrintStat(row.deaths)} ({numberPrintStat(row.todayDeaths)})
-              </StyledTableCell>
-              <StyledTableCell align="right">{numberPrintStat(row.active)}</StyledTableCell>
-              <StyledTableCell align="right">{numberPrintStat(row.tests)}</StyledTableCell>
-              <StyledTableCell align="right">{numberPrintStat(row.population)}</StyledTableCell>
-            </StyledTableRow>
-          ))}
+          {tableData
+            // eslint-disable-next-line
+            ?.filter((val) => {
+              if (searchTerm === "") {
+                return val
+              } else if (val.country.toLowerCase().includes(searchTerm.toLowerCase())) {
+                return val
+              }
+            })
+            .map((row, index) => (
+              <StyledTableRow key={index}>
+                <StyledTableCell className={classes.country}>
+                  <img src={row.countryInfo.flag} alt="" loading="lazy" width="26" /> {row.country}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  {numberPrintStat(row.cases)} ({numberPrintStat(row.todayCases)})
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  {numberPrintStat(row.recovered)} ({numberPrintStat(row.todayRecovered)})
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  {numberPrintStat(row.deaths)} ({numberPrintStat(row.todayDeaths)})
+                </StyledTableCell>
+                <StyledTableCell align="right">{numberPrintStat(row.active)}</StyledTableCell>
+                <StyledTableCell align="right">{numberPrintStat(row.tests)}</StyledTableCell>
+                <StyledTableCell align="right">{numberPrintStat(row.population)}</StyledTableCell>
+              </StyledTableRow>
+            ))}
         </TableBody>
       </Table>
     </TableContainer>

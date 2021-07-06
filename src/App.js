@@ -145,6 +145,14 @@ function App() {
           />
         </Grid>
         <Grid item xs={12} md={3}>
+          <Card className="app__chart">
+            <CardContent>
+              <h3>
+                {value.name} {capitalize(casesType)}
+              </h3>
+              <LineGraph casesType={casesType} value={value} />
+            </CardContent>
+          </Card>
           <Card className="app__table">
             <CardContent>
               <div className="app__table__header">
@@ -152,14 +160,6 @@ function App() {
                 <FullScreenDialog />
               </div>
               <Table countries={tableData} casesType={casesType} global={global} />
-            </CardContent>
-          </Card>
-          <Card className="app__worldwide">
-            <CardContent>
-              <h3>
-                {value.name} {capitalize(casesType)}
-              </h3>
-              <LineGraph casesType={casesType} value={value} />
             </CardContent>
           </Card>
         </Grid>

@@ -16,8 +16,7 @@ body {
   /* justify-content: space-evenly; */
 }
 
-.app__worldwide {
-  margin-top: 19px;
+.app__chart {
   height: 420px;
 }
 
@@ -28,6 +27,7 @@ body {
 
 .app__table {
   height: 400px;
+  margin-top: 19px;
   min-height: calc(100vh - 420px - 20px - 20px - 20px);
 }
 .app__table__header {
@@ -57,6 +57,10 @@ body {
 }
 .leaflet-control-zoom-fullscreen:hover {
   background-image: url("/src/img/fullscreen-black.svg") !important;
+}
+
+.MuiPaper-root {
+  background-color: #1f1f1f !important;
 }
 
 @media (max-width: 990px) {

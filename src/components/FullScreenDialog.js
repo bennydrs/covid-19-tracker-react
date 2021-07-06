@@ -5,6 +5,7 @@ import {
   IconButton,
   makeStyles,
   Slide,
+  TextField,
   Toolbar,
   Typography,
 } from "@material-ui/core"
@@ -22,6 +23,21 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     flex: 1,
   },
+  wrapSearchInput: {
+    padding: "0 12px",
+    width: "100%",
+    maxWidth: 1600,
+    margin: "0 auto",
+    [theme.breakpoints.down("md")]: {
+      padding: 0,
+    },
+  },
+  searchInput: {
+    margin: "16px 0",
+    [theme.breakpoints.down("md")]: {
+      margin: "10px 0 10px 4px ",
+    },
+  },
 }))
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -33,6 +49,7 @@ const FullScreenDialog = () => {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [tableData, setTableData] = useState([])
+  const [searchTerm, setSearchTerm] = useState("")
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -79,7 +96,18 @@ const FullScreenDialog = () => {
             </Typography>
           </Toolbar>
         </AppBar>
-        <TableDataCountry tableData={tableData} />
+        <div className={classes.wrapSearchInput}>
+          <TextField
+            id="outlined-basic"
+            label="Search country"
+            variant="outlined"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            size="small"
+            className={classes.searchInput}
+          />
+        </div>
+        <TableDataCountry tableData={tableData} searchTerm={searchTerm} />
       </Dialog>
     </>
   )

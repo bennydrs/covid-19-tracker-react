@@ -80,7 +80,7 @@ const LineGraph = ({ casesType = "cases", value }) => {
       const url =
         countryCode === "worldwide"
           ? "https://disease.sh/v3/covid-19/historical/all?lastday=120"
-          : `https://disease.sh/v3/covid-19/historical/${countryCode}?lastdays=90`
+          : `https://disease.sh/v3/covid-19/historical/${countryCode}?lastdays=60`
 
       await fetch(url)
         .then((res) => res.json())
