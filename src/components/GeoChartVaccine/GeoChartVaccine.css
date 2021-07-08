@@ -1,0 +1,9 @@
+.header_geoChartVaccine {
+  margin-bottom: 14px !important;
+}
+
+g > g > path[fill="#ffffff"] {
+  fill: #000;
+  stroke: red;
+  stroke-width: 0;
+}

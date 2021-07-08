@@ -1,4 +1,5 @@
 // @ts-nocheck
+
 import { Card, CardContent, Grid } from "@material-ui/core"
 import "leaflet/dist/leaflet.css"
 import { useEffect, useRef, useState } from "react"
@@ -9,6 +10,7 @@ import InfoBox from "./components/InfoBox/InfoBox"
 import LineGraph from "./components/LineGraph"
 import Map from "./components/Map/Map"
 import Table from "./components/Table/Table"
+import Vaccine from "./components/Vaccine"
 import { capitalize, numberPrintStat, sortData } from "./util"
 
 function App() {
@@ -41,6 +43,7 @@ function App() {
           const countries = data.map((country) => ({
             name: country.country,
             value: country.countryInfo.iso2,
+            population: country.population,
           }))
           const sortedData = sortData(data)
           const newCountries = [value].concat(countries)
@@ -78,12 +81,12 @@ function App() {
     onCountryChange()
   }, [value])
 
-  useEffect(() => {
-    const updateVisitor = () => {
-      fetch("https://api.countapi.xyz/update/tracking-covid19/website-bd/?amount=1")
-    }
-    updateVisitor()
-  }, [])
+  // useEffect(() => {
+  //   const updateVisitor = () => {
+  //     fetch("https://api.countapi.xyz/update/tracking-covid19/website-bd/?amount=1")
+  //   }
+  //   updateVisitor()
+  // }, [])
 
   const [scrollWidth, setScrollWidth] = useState(0)
 
@@ -94,7 +97,7 @@ function App() {
   return (
     <div className="app">
       <Grid container spacing={2}>
-        <Grid item xs={12} md={9}>
+        <Grid item xs={12} sm={12} md={8} lg={9}>
           <Header
             value={value}
             countries={countries}
@@ -144,7 +147,7 @@ function App() {
             country={value.name}
           />
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} sm={12} md={4} lg={3}>
           <Card className="app__chart">
             <CardContent>
               <h3>
@@ -164,6 +167,7 @@ function App() {
           </Card>
         </Grid>
       </Grid>
+      <Vaccine value={value} countries={countries} />
     </div>
   )
 }
