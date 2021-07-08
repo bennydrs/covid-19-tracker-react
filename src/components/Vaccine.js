@@ -43,8 +43,8 @@ const Vaccine = ({ value, countries }) => {
       <Grid item xs={12} sm={12} md={8} lg={9}>
         <Card className="geoChartVaccine">
           <CardContent>
-            <Typography variant="h5" component="h2" className="header_geoChartVaccine">
-              {value.name} Vaccinations
+            <Typography variant="h6" component="h3" className="header_geoChartVaccine">
+              {value.name} Map of Vaccinations
             </Typography>
             <GeoChartVaccine value={value} data={data} />
           </CardContent>

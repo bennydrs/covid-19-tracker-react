@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { Card, CardContent, Grid } from "@material-ui/core"
+import { Card, CardContent, Grid, Typography } from "@material-ui/core"
 import "leaflet/dist/leaflet.css"
 import { useEffect, useRef, useState } from "react"
 import "./App.css"
@@ -44,6 +44,7 @@ function App() {
             name: country.country,
             value: country.countryInfo.iso2,
             population: country.population,
+            flag: country.countryInfo.flag,
           }))
           const sortedData = sortData(data)
           const newCountries = [value].concat(countries)
@@ -81,12 +82,12 @@ function App() {
     onCountryChange()
   }, [value])
 
-  // useEffect(() => {
-  //   const updateVisitor = () => {
-  //     fetch("https://api.countapi.xyz/update/tracking-covid19/website-bd/?amount=1")
-  //   }
-  //   updateVisitor()
-  // }, [])
+  useEffect(() => {
+    const updateVisitor = () => {
+      fetch("https://api.countapi.xyz/update/tracking-covid19/website-bd/?amount=1")
+    }
+    updateVisitor()
+  }, [])
 
   const [scrollWidth, setScrollWidth] = useState(0)
 
@@ -150,16 +151,18 @@ function App() {
         <Grid item xs={12} sm={12} md={4} lg={3}>
           <Card className="app__chart">
             <CardContent>
-              <h3>
+              <Typography variant="h6" component="h3" className="header__card">
                 {value.name} {capitalize(casesType)}
-              </h3>
+              </Typography>
               <LineGraph casesType={casesType} value={value} />
             </CardContent>
           </Card>
           <Card className="app__table">
             <CardContent>
               <div className="app__table__header">
-                <h3>{capitalize(casesType)} by Country</h3>
+                <Typography variant="h6" component="h3">
+                  {capitalize(casesType)} by Country
+                </Typography>
                 <FullScreenDialog />
               </div>
               <Table countries={tableData} casesType={casesType} global={global} />

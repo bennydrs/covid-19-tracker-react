@@ -16,12 +16,11 @@
 }
 
 .table {
-  /* margin-top: 20px; */
   margin-bottom: 20px;
   overflow-y: scroll;
-  height: 340px;
+  height: 486px;
   /* min-height: calc(100vh - 560px - 200px); */
-  min-height: calc(100vh - 590px - 20px - 20px - 20px);
+  /* min-height: calc(100vh - 590px - 20px - 20px - 20px); */
   color: #ddd;
 }
 
@@ -88,11 +87,11 @@ table {
   background: #555;
 }
 
-@media (min-width: 991.98px) {
+/* @media (min-width: 991.98px) {
   .table {
     height: 330px;
   }
-}
+} */
 
 @media (max-width: 600px) {
   .table {

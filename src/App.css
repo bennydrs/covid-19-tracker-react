@@ -28,9 +28,9 @@ body {
 }
 
 .app__table {
-  height: 400px;
-  margin-top: 19px;
-  min-height: calc(100vh - 420px - 20px - 20px - 20px);
+  height: 630px;
+  margin-top: 16px;
+  /* min-height: calc(100vh - 420px - 20px - 20px - 20px); */
 }
 .app__table__header {
   display: flex;
@@ -38,9 +38,8 @@ body {
   align-items: center;
 }
 
-.MuiCard-root {
-  background-color: #1f1f1f !important;
-  color: #fff !important;
+.header__card {
+  margin-bottom: 14px !important;
 }
 
 .leaflet-touch .leaflet-bar a {
@@ -65,12 +64,6 @@ body {
   background-color: #1f1f1f !important;
 }
 
-@media (max-width: 1200px) {
-  .app__table {
-    min-height: 435px;
-  }
-}
-
 @media (max-width: 990px) {
   .app {
     flex-direction: column;
@@ -82,10 +75,6 @@ body {
 
   .app__right {
     margin-top: 15px;
-  }
-
-  .app__table {
-    min-height: 435px;
   }
 }
 
@@ -106,5 +95,11 @@ body {
 
   .app__stats::-webkit-scrollbar {
     display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .app {
+    padding: 14px;
   }
 }

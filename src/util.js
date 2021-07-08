@@ -28,13 +28,13 @@ const casesTypeColors = {
     hex: recoveredCol.hex,
     rgb: `rgb(${recoveredCol.rgbNum})`,
     // half_op: "rgba(125, 215, 29, 0.5)",
-    multiplier: 1000,
+    multiplier: 600,
   },
   deaths: {
     hex: deathsCol.hex,
     rgb: `rgb(${deathsCol.rgbNum})`,
     // half_op: "rgba(251, 68, 67, 0.5)",
-    multiplier: 1200,
+    multiplier: 600,
   },
 }
 
