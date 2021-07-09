@@ -6,7 +6,9 @@ const GeoChartVaccine = ({ value, data }) => {
   const [width, setWidth] = useState(0)
   const [sizeMap, setSizeMap] = useState(0)
 
-  const dataChart = [["Country", "Enough for people", "Doses administered"], ...data]
+  const dataSliced = data.map((d) => d.slice(0, 3))
+
+  const dataChart = [["Country", "Enough for people", "Doses administered"], ...dataSliced]
 
   useEffect(() => {
     setWidth(window.innerWidth)

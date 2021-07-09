@@ -4,6 +4,7 @@ import { Card, CardContent, Grid, Typography } from "@material-ui/core"
 import "leaflet/dist/leaflet.css"
 import { useEffect, useRef, useState } from "react"
 import "./App.css"
+import Footer from "./components/Footer"
 import FullScreenDialog from "./components/FullScreenDialog"
 import Header from "./components/Header/Header"
 import InfoBox from "./components/InfoBox/InfoBox"
@@ -171,6 +172,7 @@ function App() {
         </Grid>
       </Grid>
       <Vaccine value={value} countries={countries} />
+      <Footer />
     </div>
   )
 }

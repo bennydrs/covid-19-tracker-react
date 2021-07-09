@@ -29,7 +29,7 @@ const Vaccine = ({ value, countries }) => {
               .replace("S. Korea", "South Korea")
               .replace("Congo", "CD")
               .replace("South Sudan", "SS")
-            dataVaccine.push([replaceCountry, persen, row.timeline[0].total])
+            dataVaccine.push([replaceCountry, persen, row.timeline[0].total, country.flag])
           }
         })
       })

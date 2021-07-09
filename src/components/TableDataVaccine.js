@@ -1,6 +1,7 @@
 import {
   Card,
   CardContent,
+  makeStyles,
   Table,
   TableBody,
   TableCell,
@@ -46,7 +47,20 @@ const StyledTablePagination = withStyles(() => ({
   },
 }))(TablePagination)
 
+const useStyles = makeStyles(() => ({
+  country: {
+    display: "flex",
+    alignItems: "center",
+    "& img": {
+      marginRight: 8,
+      borderRadius: 2,
+    },
+  },
+}))
+
 const TableDataVaccine = ({ data }) => {
+  const classes = useStyles()
+
   let sum = 0
   const dataTable = data.map((d) => {
     sum += d[2]
@@ -54,6 +68,7 @@ const TableDataVaccine = ({ data }) => {
       id: d[0],
       country: d[0],
       doses: d[2],
+      flag: d[3],
     }
   })
 
@@ -91,7 +106,10 @@ const TableDataVaccine = ({ data }) => {
                 : dataTableSorted
               ).map((row, index) => (
                 <StyledTableRow key={index}>
-                  <StyledTableCell>{row.country}</StyledTableCell>
+                  <StyledTableCell className={classes.country}>
+                    <img src={row.flag} alt="" width="25" height="15" loading="lazy" />{" "}
+                    {row.country}
+                  </StyledTableCell>
                   <StyledTableCell align="right">{numberPrintStat(row.doses)}</StyledTableCell>
                 </StyledTableRow>
               ))}
