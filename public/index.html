@@ -3,28 +3,29 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <link rel="icon" href="%PUBLIC_URL%/images/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
   <!-- Primary Meta Tags -->
   <meta name="title" content="COVID-19 Tracker">
-  <meta name="description" content="Tracking COVID-19 in arround the world">
+  <meta name="description" content="Tracking cases, recovered, deaths and vaccine COVID-19 in arround the world">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://trackingcovid19.vercel.app/">
   <meta property="og:title" content="COVID-19 Tracker">
-  <meta property="og:description" content="Tracking COVID-19 in arround the world">
-  <meta property="og:image" content="https://trackingcovid19.vercel.app/covid-image.jpg">
+  <meta property="og:description" content="Tracking cases, recovered, deaths and vaccine COVID-19 in arround the world">
+  <meta property="og:image" content="https://trackingcovid19.vercel.app/images/covid-image.jpg">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://trackingcovid19.vercel.app/">
   <meta property="twitter:title" content="COVID-19 Tracker">
-  <meta property="twitter:description" content="Tracking COVID-19 in arround the world">
-  <meta property="twitter:image" content="https://trackingcovid19.vercel.app/covid-image.jpg">
+  <meta property="twitter:description"
+    content="Tracking cases, recovered, deaths and vaccine COVID-19 in arround the world">
+  <meta property="twitter:image" content="https://trackingcovid19.vercel.app/images/covid-image.jpg">
 
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/images/apple-touch-icon.png" />
 
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
   <title>COVID-19 Tracker</title>
@@ -33,6 +34,16 @@
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./serviceworker.js')
+          .then((reg) => console.log('Success: ', reg.scope))
+          .catch((err) => console.log('Failure: ', err));
+      })
+    }
+  </script>
 </body>
 
 </html>
